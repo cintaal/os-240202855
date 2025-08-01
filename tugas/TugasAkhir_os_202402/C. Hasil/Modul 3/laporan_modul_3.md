@@ -2,44 +2,38 @@
 
 **Mata Kuliah**: Sistem Operasi
 **Semester**: Genap / Tahun Ajaran 2024–2025
-**Nama**: `<Nama Lengkap>`
-**NIM**: `<Nomor Induk Mahasiswa>`
+**Nama**: `<Cinta Alghumaidatul Affaf>`
+**NIM**: `<240202855>`
 **Modul yang Dikerjakan**:
-`(Contoh: Modul 1 – System Call dan Instrumentasi Kernel)`
+`(Manajemen Memori Tingkat Lanjut)`
 
 ---
 
 ## 📌 Deskripsi Singkat Tugas
 
-Tuliskan deskripsi singkat dari modul yang Anda kerjakan. Misalnya:
-
-* **Modul 1 – System Call dan Instrumentasi Kernel**:
-  Menambahkan dua system call baru, yaitu `getpinfo()` untuk melihat proses yang aktif dan `getReadCount()` untuk menghitung jumlah pemanggilan `read()` sejak boot.
+* **Modul 3 – Manajemen Memori Tingkat Lanjut**:
+  Mengimplementasikan Copy-on-Write Fork agar proses fork() efisien dalam penggunaan memori, dan Shared Memory ala System V menggunakan syscall shmget() dan shmrelease().
 ---
 
 ## 🛠️ Rincian Implementasi
 
-Tuliskan secara ringkas namun jelas apa yang Anda lakukan:
+### modul 3:
 
-### Contoh untuk Modul 1:
-
-* Menambahkan dua system call baru di file `sysproc.c` dan `syscall.c`
-* Mengedit `user.h`, `usys.S`, dan `syscall.h` untuk mendaftarkan syscall
-* Menambahkan struktur `struct pinfo` di `proc.h`
-* Menambahkan counter `readcount` di kernel
-* Membuat dua program uji: `ptest.c` dan `rtest.c`
+* Menambahkan array ref_count[] di vm.c sebagai reference counter untuk halaman fisik
+* Menambahkan flag PTE_COW di mmu.h untuk menandai halaman copy-on-write
+* Membuat fungsi cowuvm() sebagai pengganti copyuvm() saat fork
+* Menangani page fault di trap.c untuk membuat salinan halaman saat proses menulis ke memori COW
+* Memodifikasi fork() di proc.c agar menggunakan cowuvm()
+* Menambahkan struktur shmtab[] di vm.c untuk manajemen shared memory
+* Membuat syscall baru shmget(int key) dan shmrelease(int key)
+* Mendaftarkan syscall di syscall.c, usys.S, syscall.h, user.h, dan sysproc.c
 ---
 
 ## ✅ Uji Fungsionalitas
 
-Tuliskan program uji apa saja yang Anda gunakan, misalnya:
+* cowtest: untuk menguji mekanisme Copy-on-Write pada fork
 
-* `ptest`: untuk menguji `getpinfo()`
-* `rtest`: untuk menguji `getReadCount()`
-* `cowtest`: untuk menguji fork dengan Copy-on-Write
-* `shmtest`: untuk menguji `shmget()` dan `shmrelease()`
-* `chmodtest`: untuk memastikan file `read-only` tidak bisa ditulis
-* `audit`: untuk melihat isi log system call (jika dijalankan oleh PID 1)
+* shmtest: untuk menguji alokasi dan akses memori bersama
 
 ---
 
@@ -50,7 +44,7 @@ Lampirkan hasil uji berupa screenshot atau output terminal. Contoh:
 ### 📍 Contoh Output `cowtest`:
 
 ```
-Child sees: Y
+Child sees: Y  
 Parent sees: X
 ```
 
@@ -61,28 +55,20 @@ Child reads: A
 Parent reads: B
 ```
 
-### 📍 Contoh Output `chmodtest`:
-
-```
-Write blocked as expected
-```
-
 Jika ada screenshot:
 
 ```
-![hasil cowtest](./screenshots/cowtest_output.png)
-```
+![mod 3](https://github.com/user-attachments/assets/4a0e9b1b-2936-4103-8ce1-736885472852)
 
 ---
 
 ## ⚠️ Kendala yang Dihadapi
 
-Tuliskan kendala (jika ada), misalnya:
-
-* Salah implementasi `page fault` menyebabkan panic
-* Salah memetakan alamat shared memory ke USERTOP
-* Proses biasa bisa akses audit log (belum ada validasi PID)
-
+* Error field read dan write di file.h karena salah deklarasi pointer function
+✅ Fix: ubah jadi int (*read)(...)
+* Fork gagal setelah CoW karena lupa mapping ulang dengan mappages() saat page fault
+* Panic saat shmtest jalan karena lupa nambah incref() di shmget()
+* shmrelease() tidak melepas halaman karena refcount tidak berkurang (double mapping)
 ---
 
 ## 📚 Referensi
