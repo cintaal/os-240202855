@@ -65,11 +65,11 @@ screenshot:
 ## ⚠️ Kendala yang Dihadapi
 ---
 
-Awalnya mengalami kesalahan dalam implementasi argptr() pada fungsi sys_getpinfo karena kurang tepat dalam penanganan pointer
-Kesalahan saat mengakses struktur proc karena tidak memproteksi dengan ptable.lock
-Lupa menambahkan #include "proc.h" di beberapa file menyebabkan error saat kompilasi
-Salah posisi registrasi syscall di array syscall menyebabkan getreadcount() tidak dikenali
-Semua kendala berhasil diatasi dengan debugging dan merujuk ke dokumentasi xv6 MIT.
+* Awalnya mengalami kesalahan dalam implementasi argptr() pada fungsi sys_getpinfo karena kurang tepat dalam penanganan pointer
+* Kesalahan saat mengakses struktur proc karena tidak memproteksi dengan ptable.lock
+* Lupa menambahkan #include "proc.h" di beberapa file menyebabkan error saat kompilasi
+* Salah posisi registrasi syscall di array syscall menyebabkan getreadcount() tidak dikenali
+* Semua kendala berhasil diatasi dengan debugging dan merujuk ke dokumentasi xv6 MIT.
 
 ---
 
