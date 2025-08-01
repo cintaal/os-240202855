@@ -11,67 +11,56 @@
 
 ## 📌 Deskripsi Singkat Tugas
 
-Tuliskan deskripsi singkat dari modul yang Anda kerjakan. Misalnya:
-
-* **Modul 1 – System Call dan Instrumentasi Kernel**:
-  Menambahkan dua system call baru, yaitu `getpinfo()` untuk melihat proses yang aktif dan `getReadCount()` untuk menghitung jumlah pemanggilan `read()` sejak boot.
+* **Modul 5 – Audit dan Keamanan Sistem**:
+ Menambahkan fitur audit pada kernel xv6 yang mencatat setiap pemanggilan system call, serta menyediakan syscall get_audit_log() yang hanya dapat diakses oleh proses dengan PID 1. Audit ini mencatat PID pemanggil, nomor system call, dan waktu (tick) saat dipanggil.
 ---
 
 ## 🛠️ Rincian Implementasi
 
-Tuliskan secara ringkas namun jelas apa yang Anda lakukan:
-
 ### Contoh untuk Modul 1:
 
-* Menambahkan dua system call baru di file `sysproc.c` dan `syscall.c`
-* Mengedit `user.h`, `usys.S`, dan `syscall.h` untuk mendaftarkan syscall
-* Menambahkan struktur `struct pinfo` di `proc.h`
-* Menambahkan counter `readcount` di kernel
-* Membuat dua program uji: `ptest.c` dan `rtest.c`
+* Menambahkan struktur audit_entry dan buffer audit_log[] di syscall.c
+* Mengimplementasikan pencatatan log dalam fungsi syscall()
+* Menambahkan system call get_audit_log():
+* Nomor syscall ditambahkan di syscall.h
+* Deklarasi di user.h
+* Entri syscall ditambahkan ke usys.S
+* Registrasi syscall dilakukan di syscall.c
+* Implementasi syscall ditulis di sysproc.c dan dibatasi hanya untuk proses dengan PID 1
+* Membuat program penguji audit.c untuk mencetak log
+* Menambahkan _audit ke dalam Makefile
+
 ---
 
 ## ✅ Uji Fungsionalitas
 
-Tuliskan program uji apa saja yang Anda gunakan, misalnya:
+audit: program untuk mengambil dan mencetak isi log system call. Diuji dalam dua kondisi:
 
-* `ptest`: untuk menguji `getpinfo()`
-* `rtest`: untuk menguji `getReadCount()`
-* `cowtest`: untuk menguji fork dengan Copy-on-Write
-* `shmtest`: untuk menguji `shmget()` dan `shmrelease()`
-* `chmodtest`: untuk memastikan file `read-only` tidak bisa ditulis
-* `audit`: untuk melihat isi log system call (jika dijalankan oleh PID 1)
+* Sebagai proses biasa → Akses ditolak
+* Sebagai proses PID 1 (init) → Berhasil menampilkan log audit
 
 ---
 
 ## 📷 Hasil Uji
 
-Lampirkan hasil uji berupa screenshot atau output terminal. Contoh:
-
-### 📍 Contoh Output `cowtest`:
+### 📍Output `jika dijalankan oleh PID 1`:
 
 ```
-Child sees: Y
-Parent sees: X
-```
+=== Audit Log ===
+[0] PID=1 SYSCALL=7 TICK=4
+[1] PID=1 SYSCALL=15 TICK=7
+[2] PID=1 SYSCALL=17 TICK=7
+...
 
-### 📍 Contoh Output `shmtest`:
-
-```
-Child reads: A
-Parent reads: B
-```
-
-### 📍 Contoh Output `chmodtest`:
-
-```
-Write blocked as expected
 ```
 
 Jika ada screenshot:
 
 ```
-![hasil cowtest](./screenshots/cowtest_output.png)
+<img width="1579" height="1057" alt="Screenshot 2025-07-31 143803" src="https://github.com/user-attachments/assets/bd51a4b6-e46c-4b75-965c-6ca03a1eea4d" />
+
 ```
+<img width="958" height="1066" alt="Screenshot 2025-07-31 143819" src="https://github.com/user-attachments/assets/533d5ef7-07a0-4dbd-9ece-0a2dc9569a16" />
 
 ---
 
@@ -79,10 +68,11 @@ Jika ada screenshot:
 
 Tuliskan kendala (jika ada), misalnya:
 
-* Salah implementasi `page fault` menyebabkan panic
-* Salah memetakan alamat shared memory ke USERTOP
-* Proses biasa bisa akses audit log (belum ada validasi PID)
-
+* Awalnya lupa menambahkan validasi PID dalam sys_get_audit_log(), sehingga semua proses bisa membaca log
+* Salah dalam penggunaan argptr() menyebabkan kernel panic ketika audit.c mencoba mengakses buffer log
+* audit_index tidak dijaga dengan batas maksimal, menyebabkan potensi overflow
+* Program audit.c sempat gagal kompilasi karena deklarasi struct audit_entry tidak sama dengan versi kernel → disamakan di file user-level
+* Lupa mendaftarkan audit.c di Makefile, menyebabkan program tidak muncul di shell xv6
 ---
 
 ## 📚 Referensi
