@@ -45,7 +45,6 @@
 Child sees: Y  
 Parent sees: X
 ```
-
 ### 📍 Contoh Output `shmtest`:
 
 ```
@@ -53,12 +52,10 @@ Child reads: A
 Parent reads: B
 ```
 
-Jika ada screenshot:
-
 ```
 ![mod 3](https://github.com/user-attachments/assets/ac9a77f1-345f-4d09-80d2-ad954cd569e8)
-
 ---
+
 
 ---
 
