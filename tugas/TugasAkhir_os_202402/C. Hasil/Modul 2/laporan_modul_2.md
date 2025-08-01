@@ -5,7 +5,7 @@
 **Nama**: `<Cinta Alghumaidatul Affaf>`
 **NIM**: `<240202855>`
 **Modul yang Dikerjakan**:
-`(Contoh: Modul 2 – Penjadwalan CPU Lanjutan (Priority Scheduling Non-Preemptive)
+`( Modul 2 – Penjadwalan CPU Lanjutan (Priority Scheduling Non-Preemptive)
 )`
 
 ---
@@ -18,18 +18,18 @@
 
 ## 🛠️ Rincian Implementasi
 
-### Contoh untuk Modul 1:
+### Modul 2:
 
-*Menambahkan field priority ke dalam struct proc di file proc.h
-*Inisialisasi nilai default priority di fungsi allocproc() pada proc.c
-*Membuat syscall set_priority(int):
-*Menambahkan nomor syscall di syscall.h
-*Menambahkan deklarasi syscall di user.h dan entri di usys.S
-*Registrasi syscall di syscall.c
-*Implementasi fungsi syscall di sysproc.c
-*Memodifikasi fungsi scheduler() di proc.c agar memilih proses RUNNABLE dengan prioritas tertinggi
-*Membuat program uji ptest.c untuk menguji urutan eksekusi proses berdasarkan prioritas
-*Menambahkan ptest ke daftar program pada Makefile
+* Menambahkan field priority ke dalam struct proc di file proc.h
+* Inisialisasi nilai default priority di fungsi allocproc() pada proc.c
+* Membuat syscall set_priority(int):
+* Menambahkan nomor syscall di syscall.h
+* Menambahkan deklarasi syscall di user.h dan entri di usys.S
+* Registrasi syscall di syscall.c
+* Implementasi fungsi syscall di sysproc.c
+* Memodifikasi fungsi scheduler() di proc.c agar memilih proses RUNNABLE dengan prioritas tertinggi
+* Membuat program uji ptest.c untuk menguji urutan eksekusi proses berdasarkan prioritas
+* Menambahkan ptest ke daftar program pada Makefile
 
 ---
 
@@ -41,8 +41,6 @@
 
 ## 📷 Hasil Uji
 
-Lampirkan hasil uji berupa screenshot atau output terminal. Contoh:
-
 ### 📍Output `ptest`:
 
 ```
@@ -51,10 +49,8 @@ Child 2 selesai
 Parent selesai
 
 ```
-Jika ada screenshot:
+<img width="1055" height="495" alt="Screenshot 2025-07-30 121839" src="https://github.com/user-attachments/assets/99a6f849-7ffe-4131-b755-28c0ec7acaa6" />
 
-```
-<img width="1055" height="495" alt="Screenshot 2025-07-30 121839" src="https://github.com/user-attachments/assets/adc3dece-e156-4aa8-ac56-434775af8e0c" />
 ---
 
 ## ⚠️ Kendala yang Dihadapi
