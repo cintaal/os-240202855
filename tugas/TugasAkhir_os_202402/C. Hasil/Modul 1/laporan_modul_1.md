@@ -42,49 +42,43 @@
 ### 📍Output `ptest`:
 
 ```
-PID	MEM	NAME
-1	4096	init
-2	2048	sh
-3	2048	ptest
+PID	  MEM   	NAME
+1   	12288	  init
+2	    16384	   sh
+3	    12288	  ptest
 
 ```
 
-### 📍 Contoh Output `shmtest`:
+### 📍 output `rtest`:
 
 ```
-Child reads: A
-Parent reads: B
+Read Count Sebelum: 14
+hello
+Read Count Setelah: 15
 ```
-
-### 📍 Contoh Output `chmodtest`:
-
-```
-Write blocked as expected
-```
-
-Jika ada screenshot:
+screenshot:
 
 <img width="628" height="679" alt="Screenshot 2025-07-30 111725" src="https://github.com/user-attachments/assets/b3007a28-d171-4746-a64b-8d3a8ea3ae11" />
 
 
 
 ## ⚠️ Kendala yang Dihadapi
+---
 
-Tuliskan kendala (jika ada), misalnya:
-
-* Salah implementasi `page fault` menyebabkan panic
-* Salah memetakan alamat shared memory ke USERTOP
-* Proses biasa bisa akses audit log (belum ada validasi PID)
+Awalnya mengalami kesalahan dalam implementasi argptr() pada fungsi sys_getpinfo karena kurang tepat dalam penanganan pointer
+Kesalahan saat mengakses struktur proc karena tidak memproteksi dengan ptable.lock
+Lupa menambahkan #include "proc.h" di beberapa file menyebabkan error saat kompilasi
+Salah posisi registrasi syscall di array syscall menyebabkan getreadcount() tidak dikenali
+Semua kendala berhasil diatasi dengan debugging dan merujuk ke dokumentasi xv6 MIT.
 
 ---
 
 ## 📚 Referensi
 
-Tuliskan sumber referensi yang Anda gunakan, misalnya:
-
 * Buku xv6 MIT: [https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf](https://pdos.csail.mit.edu/6.828/2018/xv6/book-rev11.pdf)
 * Repositori xv6-public: [https://github.com/mit-pdos/xv6-public](https://github.com/mit-pdos/xv6-public)
 * Stack Overflow, GitHub Issues, diskusi praktikum
+* AI chat gpt dan claude.ai
 
 ---
 
