@@ -2,10 +2,10 @@
 
 **Mata Kuliah**: Sistem Operasi
 **Semester**: Genap / Tahun Ajaran 2024–2025
-**Nama**: `<Nama Lengkap>`
-**NIM**: `<Nomor Induk Mahasiswa>`
+**Nama**: `<Cinta Alghumaidatul A>`
+**NIM**: `<240202855>`
 **Modul yang Dikerjakan**:
-`(Contoh: Modul 1 – System Call dan Instrumentasi Kernel)`
+`( Modul 5 – Audit dan Keamanan Sistem)`
 
 ---
 
@@ -17,7 +17,7 @@
 
 ## 🛠️ Rincian Implementasi
 
-### Contoh untuk Modul 1:
+###  Modul 5:
 
 * Menambahkan struktur audit_entry dan buffer audit_log[] di syscall.c
 * Mengimplementasikan pencatatan log dalam fungsi syscall()
@@ -54,13 +54,12 @@ audit: program untuk mengambil dan mencetak isi log system call. Diuji dalam dua
 
 ```
 
-Jika ada screenshot:
+```
+<img width="1579" height="1057" alt="Screenshot 2025-07-31 143803" src="https://github.com/user-attachments/assets/da5724e7-f4c3-4251-9456-e89ab3e94d4f" />
+
 
 ```
-<img width="1579" height="1057" alt="Screenshot 2025-07-31 143803" src="https://github.com/user-attachments/assets/bd51a4b6-e46c-4b75-965c-6ca03a1eea4d" />
-
-```
-<img width="958" height="1066" alt="Screenshot 2025-07-31 143819" src="https://github.com/user-attachments/assets/533d5ef7-07a0-4dbd-9ece-0a2dc9569a16" />
+<img width="958" height="1066" alt="Screenshot 2025-07-31 143819" src="https://github.com/user-attachments/assets/5436fae0-d00f-4ebc-b9db-92d4ae0abed1" />
 
 ---
 
