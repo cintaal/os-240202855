@@ -11,47 +11,42 @@
 
 ## 📌 Deskripsi Singkat Tugas
 
-Tuliskan deskripsi singkat dari modul yang Anda kerjakan. Misalnya:
-
 * **Modul 1 – System Call dan Instrumentasi Kernel**:
-  Menambahkan dua system call baru, yaitu `getpinfo()` untuk melihat proses yang aktif dan `getReadCount()` untuk menghitung jumlah pemanggilan `read()` sejak boot.
+  Menambahkan dua system call baru pada kernel xv6, yaitu getpinfo() untuk melihat informasi proses yang sedang aktif (PID, ukuran memori, dan nama proses), serta getReadCount() untuk menghitung berapa kali fungsi read() dipanggil sejak sistem di-boot.
 ---
 
 ## 🛠️ Rincian Implementasi
 
-Tuliskan secara ringkas namun jelas apa yang Anda lakukan:
-
 ### Contoh untuk Modul 1:
 
-* Menambahkan dua system call baru di file `sysproc.c` dan `syscall.c`
-* Mengedit `user.h`, `usys.S`, dan `syscall.h` untuk mendaftarkan syscall
-* Menambahkan struktur `struct pinfo` di `proc.h`
-* Menambahkan counter `readcount` di kernel
-* Membuat dua program uji: `ptest.c` dan `rtest.c`
+* Menambahkan struktur struct pinfo di file proc.h untuk menyimpan data proses
+* Menambahkan variabel global readcount di sysproc.c untuk menghitung jumlah pemanggilan read()
+* Mengedit syscall.h untuk menambahkan nomor system call baru
+* Mendaftarkan syscall baru di syscall.c
+* Menambahkan deklarasi syscall di user.h dan usys.S
+* Mengimplementasikan fungsi sys_getpinfo dan sys_getreadcount di sysproc.c
+* Menambahkan counter pada fungsi sys_read di sysfile.c
+* Membuat dua program uji: ptest.c untuk getpinfo() dan rtest.c untuk getReadCount()
+* Menambahkan program uji ke dalam Makefile
 ---
 
 ## ✅ Uji Fungsionalitas
 
-Tuliskan program uji apa saja yang Anda gunakan, misalnya:
-
-* `ptest`: untuk menguji `getpinfo()`
-* `rtest`: untuk menguji `getReadCount()`
-* `cowtest`: untuk menguji fork dengan Copy-on-Write
-* `shmtest`: untuk menguji `shmget()` dan `shmrelease()`
-* `chmodtest`: untuk memastikan file `read-only` tidak bisa ditulis
-* `audit`: untuk melihat isi log system call (jika dijalankan oleh PID 1)
+* ptest: menguji apakah getpinfo() menampilkan proses yang aktif
+* rtest: menguji apakah getreadcount() mencatat jumlah pemanggilan read()
 
 ---
 
 ## 📷 Hasil Uji
 
-Lampirkan hasil uji berupa screenshot atau output terminal. Contoh:
-
-### 📍 Contoh Output `cowtest`:
+### 📍Output `ptest`:
 
 ```
-Child sees: Y
-Parent sees: X
+PID	MEM	NAME
+1	4096	init
+2	2048	sh
+3	2048	ptest
+
 ```
 
 ### 📍 Contoh Output `shmtest`:
@@ -69,11 +64,9 @@ Write blocked as expected
 
 Jika ada screenshot:
 
-```
-![hasil cowtest](./screenshots/cowtest_output.png)
-```
+<img width="628" height="679" alt="Screenshot 2025-07-30 111725" src="https://github.com/user-attachments/assets/b3007a28-d171-4746-a64b-8d3a8ea3ae11" />
 
----
+
 
 ## ⚠️ Kendala yang Dihadapi
 
