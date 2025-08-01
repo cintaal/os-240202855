@@ -39,8 +39,6 @@
 
 ## 📷 Hasil Uji
 
-Lampirkan hasil uji berupa screenshot atau output terminal. Contoh:
-
 ### 📍 Contoh Output `cowtest`:
 
 ```
@@ -58,11 +56,14 @@ Parent reads: B
 Jika ada screenshot:
 
 ```
-![mod 3](https://github.com/user-attachments/assets/4a0e9b1b-2936-4103-8ce1-736885472852)
+![mod 3](https://github.com/user-attachments/assets/ac9a77f1-345f-4d09-80d2-ad954cd569e8)
+
+---
 
 ---
 
 ## ⚠️ Kendala yang Dihadapi
+---
 
 * Error field read dan write di file.h karena salah deklarasi pointer function
 ✅ Fix: ubah jadi int (*read)(...)
