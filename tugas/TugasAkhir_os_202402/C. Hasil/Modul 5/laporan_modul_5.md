@@ -1,11 +1,11 @@
 # 📝 Laporan Tugas Akhir
 
-**Mata Kuliah**: Sistem Operasi
-**Semester**: Genap / Tahun Ajaran 2024–2025
-**Nama**: `<Cinta Alghumaidatul A>`
-**NIM**: `<240202855>`
-**Modul yang Dikerjakan**:
-`( Modul 5 – Audit dan Keamanan Sistem)`
+**Mata Kuliah**: Sistem Operasi  
+**Semester**: Genap / Tahun Ajaran 2024–2025  
+**Nama**: `<Cinta Alghumaidatul A>`  
+**NIM**: `<240202855>`  
+**Modul yang Dikerjakan**:  
+`( Modul 5 – Audit dan Keamanan Sistem)`  
 
 ---
 
